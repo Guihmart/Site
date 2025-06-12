@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Dia dos Namorados, Meu Amor!</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+    <style>
+        /* ... Seu CSS ... */
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrindo o Coração...</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* CRUCIAL: Posicionamento para o background-overlay */
+            position: relative; /* Base para o background-overlay */
+            overflow: hidden; /* Garante que as metades do coração sumam para fora da tela */
+            
+            opacity: 0; /* Começa invisível para o fade-in inicial da página */
+            transition: opacity 0.5s ease-in; /* Fade-in da página de transição */
+        }
+
+        /* Estilos para o div de fundo com a imagem e o desfoque */
+        .background-overlay {
+            position: absolute; /* Posiciona sobre o body */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('IM1.png'); /* Sua imagem de fundo */
+            background-size: cover; /* Cobre a tela toda */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita que a imagem se repita */
+            background-attachment: fixed; /* Fixa a imagem ao rolar */
+            filter: brightness(0.7) blur(3px); /* Escurece a imagem e desfoca */
+            z-index: -1; /* Garante que fique atrás de todo o conteúdo */
+        }
+
+        .heart-door-container {
+    position: relative;
+    width: 2000px; /* Largura total do coração (250 * 1.4) */
+    height: 1000px; /* Altura total do coração (250 * 1.4) */
+    overflow: hidden; /* Esconde as partes do SVG que "extravasam" as metades */
+    opacity: 0; /* Começa invisível para o coração inteiro */
+    animation: fadeInHeartContainer 0.8s ease-out forwards; /* Animação de entrada do coração */
+    z-index: 10;
+        }
+
+        /* Animação para o container do coração aparecer */
+        @keyframes fadeInHeartContainer {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .heart-half {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%; /* Cada metade ocupa 50% do container */
+            overflow: hidden; /* Corta a imagem para mostrar só a metade */
+        }
+
+        .heart-svg {
+            width: 200%; /* O SVG é o dobro da largura para preencher a metade */
+            height: 100%;
+            fill: #ff1493; /* Cor do coração */
+            position: absolute; /* Para posicionar dentro da metade */
+        }
+
+        .left-half {
+            left: 0;
+        }
+        .left-half .heart-svg {
+            left: 0; /* O SVG esquerdo começa na posição normal */
+        }
+
+        .right-half {
+            right: 0;
+        }
+        .right-half .heart-svg {
+            left: -100%; /* O SVG direito é deslocado para a esquerda para mostrar a metade direita */
+        }
+
+        /* Animação das "portas" do coração abrindo */
+        .heart-door-container.open .left-half {
+            animation: openLeftHeart 1.2s ease-in-out forwards;
+        }
+        .heart-door-container.open .right-half {
+            animation: openRightHeart 1.2s ease-in-out forwards;
+        }
+
+        @keyframes openLeftHeart {
+            0% { transform: translateX(0); opacity: 1; }
+            80% { opacity: 1; } /* Mantém a opacidade até quase o fim */
+            100% { transform: translateX(-100%); opacity: 0; } /* Desliza para a esquerda e some */
+        }
+
+        @keyframes openRightHeart {
+            0% { transform: translateX(0); opacity: 1; }
+            80% { opacity: 1; } /* Mantém a opacidade até quase o fim */
+            100% { transform: translateX(100%); opacity: 0; } /* Desliza para a direita e some */
+        }
+
+        /* Media queries para responsividade */
+        @media (max-width: 768px) {
+            .heart-door-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div> <div class="heart-door-container">
+        <div class="heart-half left-half">
+            <svg class="heart-svg" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.84-1.84C6.54 16.03 2 12.54 2 8.5A5.5 5.5 0 0 1 7.5 3c1.74 0 3.41.81 4.5 2.15C13.09 3.81 14.76 3 16.5 3A5.5 5.5 0 0 1 22 8.5c0 4.04-4.54 7.53-8.16 11.01L12 21.35z"/>
+            </svg>
+        </div>
+        <div class="heart-half right-half">
+            <svg class="heart-svg" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.84-1.84C6.54 16.03 2 12.54 2 8.5A5.5 5.5 0 0 1 7.5 3c1.74 0 3.41.81 4.5 2.15C13.09 3.81 14.76 3 16.5 3A5.5 5.5 0 0 1 22 8.5c0 4.04-4.54 7.53-8.16 11.01L12 21.35z"/>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+            const heartDoorContainer = document.querySelector('.heart-door-container');
+
+            // 1. Fade-in inicial da página de transição
+            body.style.opacity = 1;
+
+            // Duração que o coração aparece e começa a abrir
+            const delayAteAbrir = 800; // 0.8 segundos
+
+            // Duração da animação de abertura do coração (deve ser igual ao CSS)
+            const duracaoAnimacaoAbertura = 1200; // 1.2 segundos
+
+            // Tempo total na página de transição antes de redirecionar (delay + duração da abertura + pequeno extra)
+            const tempoTotalNaPagina = delayAteAbrir + duracaoAnimacaoAbertura + 200; // Total de 2.2 segundos
+
+            // 2. Após o container do coração aparecer, inicia a abertura das portas
+            setTimeout(function() {
+                heartDoorContainer.classList.add('open'); // Adiciona a classe 'open' para iniciar a animação
+            }, delayAteAbrir);
+
+            // 3. Redirecionar para a página principal após todas as animações
+            setTimeout(function() {
+                window.location.href = "meu_dia_dos_namorados.html";
+            }, tempoTotalNaPagina);
+        });
+    </script>
+</body>
+</html>

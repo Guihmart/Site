@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Dia dos Namorados, Meu Amor!</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+    <style>
+        /* ... Seu CSS ... */
+    </style>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Dia dos Namorados, Meu Amor!</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Dia dos Namorados, Meu Amor!</title>
+    <style>
+        /* Estilos globais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: #5e5e5e; /* Cinza escuro */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative; /* Essencial para o background-overlay */
+            overflow-x: hidden; /* Evita barras de rolagem horizontais durante a animação */
+        }
+
+        /* Estilos para o div de fundo com a imagem e o desfoque */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('IM1.png'); /* Mude para o nome da sua imagem de fundo geral! */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.7) blur(0px) grayscale(0.2);
+            z-index: -1; /* Garante que fique atrás de todo o conteúdo */
+        }
+
+        /* Container que vai aplicar o fade-in */
+        #main-content-wrapper {
+            opacity: 0; /* Começa invisível por padrão */
+            width: 100%; /* Ocupa a largura total para centralizar o conteúdo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1; /* Permite que o wrapper se estenda para preencher o espaço */
+        }
+
+        /* Adicionado para o efeito de fade-in com slide-up (para a transição de entrada da página) */
+        #main-content-wrapper.fade-in-active {
+            animation: fadeInAnimation 1s ease-out forwards; /* 1 segundo de duração */
+        }
+
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(50px); /* Começa 50px abaixo */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Termina na posição normal */
+            }
+        }
+
+        /* Seção do Título com Imagem de Fundo */
+        #fundo-titulo {
+            width: 100%;
+            height: 400px; /* Altura da seção do título */
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        #fundo-titulo h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin: 0;
+            padding: 20px;
+            background-color: rgba(220, 20, 60, 0.7); /* Vermelho arroxeado semi-transparente */
+            border-radius: 10px;
+            z-index: 1; /* Coloca o título acima da imagem */
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Container Principal do Conteúdo (Tela Branca) */
+        #conteudo {
+            background-color: white; /* Fundo branco */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra suave */
+            padding: 40px;
+            margin-top: -80px; /* Sobrepõe a seção do título para um efeito visual */
+            margin-bottom: 40px;
+            max-width: 800px; /* Largura máxima para o conteúdo */
+            width: 90%; /* Ocupa 90% da largura em telas menores */
+            text-align: center;
+            position: relative;
+            z-index: 2; /* Garante que fique acima das outras seções */
+        }
+
+        /* Estilos das Poesias */
+        #poesias {
+            margin-bottom: 30px;
+        }
+
+        #poesias h2 {
+             font-family: 'Playfair Display', serif;
+            color: #d6336c; /* Cor rosa mais forte para o título das poesias */
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .poema {
+            font-style: italic;
+            font-size: 1.5em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #222121; /* Cor do texto das poesias */
+        }
+
+         .divisor-imagem {
+            text-align: center;
+            margin: 20px 0; /* Espaçamento entre as poesias e as imagens */
+        }
+
+        .divisor-imagem img {
+            max-width: 250px;/* <--- AJUSTADO PARA 25PX */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Para o efeito de hover */
+        }
+
+        .divisor-imagem img:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Estilos para dispositivos menores (responsividade) */
+        @media (max-width: 600px) {
+            #fundo-titulo {
+                height: 300px;
+            }
+            #fundo-titulo h1 {
+                font-size: 2.5em;
+                padding: 15px;
+            }
+            #conteudo {
+                margin-top: -60px;
+                padding: 30px;
+            }
+            #poesias h2 {
+                font-size: 1.8em;
+            }
+            .poema {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <div id="main-content-wrapper">
+        <div id="fundo-titulo">
+            <h1>Feliz Dia dos Namorados, Meu Amor!</h1>
+        </div>
+
+        <div id="conteudo">
+            <div id="poesias">
+                <h2>Minha Flor Colibri</h2>
+                <p class="poema">
+                    No jardim da vida, onde as cores se desdobrar<br>
+                    Surgiu minha amada, um encanto a cada sopro.<br>
+                    Pequena no porte, mas gigante no fulgor,<br>
+                    Parece um beija-flor, meu eterno amor..<br>
+                </p>
+
+                 <div class="divisor-imagem">
+        <img src="p1.jpg" alt="Coração decorativo">
+    </div>
+
+                <p class="poema">
+                    Com asas ligeiras, num voo de paixão,<br>
+                    Desbrava o mundo, em seu coração.<br>
+                    Brava e destemida, enfrenta qualquer ventania,<br>
+                    Mas guarda a doçura da mais linda poesia.<br>
+                </p>
+
+                 <div class="divisor-imagem">
+        <img src="p2.jpg" alt="Coração decorativo">
+    </div>
+
+                <p class="poema">
+                    Seus olhos brilham, com um toque de esplendor,<br>
+                    Refletem a alma de um raro beija-flor.<br>
+                    Que pousa em meu peito, com sua melodia,<br>
+                    Transformando em alegria cada novo dia.<br>
+                </p>
+
+                 <div class="divisor-imagem">
+        <img src="p3.jpg"alt="Coração decorativo">
+    </div>
+
+                <p class="poema">
+                    Em seu pequeno ser, reside tamanha beleza,<br>
+                    Que encanta e acende, em mim, a realeza.<br>
+                    És a mais linda flor, que a vida me ofertou,<br>
+                    Meu beija-flor valente, meu eterno amor.<br>
+                </p>
+
+                 <div class="divisor-imagem">
+        <img src="p4.jpg"alt="Coração decorativo">
+    </div>
+    
+    <p class="poema">
+                    Meu amor saiba que eu te amo muito, você<br>
+                    e a melhor coisa que me aconteceu, e muito<br>
+                    obrigado por ser a primeira namorada a passar<br>
+                    o dia dos namorados comigo, te amarei para<br>
+                    sempre<br>
+                </p>
+            </div>
+            </div>
+    </div>
+
+    <script>
+        // O CÓDIGO DA CONTAGEM REGRESSIVA FOI REMOVIDO DESTE SCRIPT
+
+        // Código para o fade-in da página (importante para a transição)
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
+            mainContentWrapper.classList.add('fade-in-active');
+        });
+    </script>
+</body>
+</html>
