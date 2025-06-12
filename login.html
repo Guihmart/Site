@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Dia dos Namorados, Meu Amor!</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+    <style>
+        /* ... Seu CSS ... */
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Especial</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+            /* Essencial para o posicionamento e centralização */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Garante que o body ocupe toda a altura da viewport */
+            margin: 0;
+            
+            flex-direction: column; /* Para alinhar o conteúdo verticalmente se houver mais de um item */
+            color: #5e5e5e; /* Cor do texto padrão */
+            
+            transition: opacity 0.5s ease-out; /* Transição de fade-out da página */
+            background-color: #ffe4e1; /* Cor de fallback caso a imagem não carregue */
+            position: relative; /* CRUCIAL: Base para posicionar o background-overlay */
+        }
+
+        /* Estilos para o div de fundo com a imagem e o desfoque */
+        .background-overlay {
+            position: absolute; /* Posiciona sobre o body */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('IM1.png'); /* Mude para o nome da sua imagem! */
+            background-size: cover; /* Cobre a tela toda */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita que a imagem se repita */
+            background-attachment: fixed; /* Fixa a imagem ao rolar */
+            filter: brightness(0.7) blur(0px) grayscale(0.2);
+            z-index: -1; /* Garante que fique atrás de todo o conteúdo */
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.85); /* Fundo branco semi-transparente para o formulário */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            
+            /* Animação sutil para o formulário aparecer */
+            transform: translateY(20px); /* Começa um pouco abaixo */
+            opacity: 0; /* Começa invisível */
+            animation: slideInLogin 0.8s ease-out 0.3s forwards; /* Animação + atraso de 0.3s */
+        }
+        
+        /* Keyframes para a animação do formulário de login */
+        @keyframes slideInLogin {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        h2 {
+            color: #d6336c; /* Rosa mais forte */
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: calc(100% - 20px); /* Ajusta a largura para padding */
+            padding: 10px;
+            border: none; /* Remove a borda padrão */
+            border-bottom: 2px solid #ccc; /* Apenas uma linha embaixo */
+            border-radius: 5px; /* Levemente arredondado */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interna sutil */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição ao focar */
+            font-size: 1em;
+        }
+        .input-group input:focus {
+            border-color: #ff1493; /* Muda a cor da linha ao focar */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(255, 20, 147, 0.4); /* Sombra ao focar */
+            outline: none; /* Remove o contorno padrão do navegador */
+        }
+
+        button {
+            background-color: #ff1493; /* Rosa choque */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #e0007d; /* Rosa choque mais escuro no hover */
+        }
+        #mensagem-erro {
+            color: #e74c3c; /* Vermelho para erro */
+            margin-top: 15px;
+            font-weight: bold;
+            display: none; /* Escondido por padrão */
+        }
+
+        /* Responsividade básica */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px;
+            }
+            .input-group input {
+                width: calc(100% - 16px); /* Ajusta a largura para telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div> <div class="login-container">
+        <h2>Bem-vindo(a), Meu Amor!</h2>
+        <p>Para entrar, por favor, digite a senha. </p>
+        <p>(dica: seu apelido e a nossa data) </p>
+        <div class="input-group">
+            <label for="username">Login:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button onclick="fazerLogin()">Entrar</button>
+        <p id="mensagem-erro">Login ou senha incorretos. Tente novamente!</p>
+    </div>
+
+    <script>
+        // Defina o login e a senha corretos para o ÚNICO usuário aqui
+        const loginCorreto = "beija flor";
+        const senhaCorreta = "22072024";
+
+        function fazerLogin() {
+            const loginDigitado = document.getElementById("username").value;
+            const senhaDigitada = document.getElementById("password").value;
+            const mensagemErro = document.getElementById("mensagem-erro");
+
+            // Verifica se o login e a senha estão corretos
+            if (loginDigitado === loginCorreto && senhaDigitada === senhaCorreta) {
+                // Inicia a transição de fade-out da página de login
+                document.body.style.opacity = 0;
+
+                // Redireciona APÓS a transição de fade-out (0.5 segundos)
+                setTimeout(function() {
+                    window.location.href = "transicao_coracao.html"; // Redireciona para a página de transição do coração
+                }, 500); // 500 milissegundos = 0.5 segundos, igual à duração da transição CSS
+            } else {
+                // Se login ou senha estiverem incorretos, mostra a mensagem de erro
+                mensagemErro.style.display = "block";
+            }
+        }
+
+        // Permite pressionar Enter quando o cursor está no campo da senha
+        document.getElementById("password").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                fazerLogin();
+            }
+        });
+    </script>
+</body>
+</html>

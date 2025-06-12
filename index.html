@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia dos Namorados Chegou!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000; /* Fundo preto */
+            color: #ffffff; /* Texto branco padrão */
+            display: flex;
+            flex-direction: column; /* Organiza os itens em coluna */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Evita barras de rolagem */
+        }
+
+        .top-image-container {
+            margin-bottom: 30px; /* Espaço entre a imagem e o relógio */
+            text-align: center;
+        }
+
+        .top-image {
+            max-width: 80%; /* Garante que a imagem não seja muito grande */
+            height: auto;
+            border-radius: 15px; /* Bordas arredondadas para a imagem */
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.7); /* Sombra rosa vibrante */
+        }
+
+        .countdown-container {
+            background-color: transparent; /* Fundo transparente para o relógio */
+            padding: 20px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8); /* Sombra vermelha forte */
+            animation: pulseShadow 2s infinite alternate; /* Animação de pulso para a sombra */
+        }
+
+        @keyframes pulseShadow {
+            from { box-shadow: 0 0 30px rgba(255, 0, 0, 0.8); }
+            to { box-shadow: 0 0 45px rgba(255, 0, 0, 1); }
+        }
+
+        #countdown-title {
+            font-size: 2.5em;
+            color: #FF0000; /* Vermelho vibrante para o título */
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+        }
+
+        #timer {
+            font-family: 'Digital-7', sans-serif; /* Fonte estilo relógio digital */
+            font-size: 6em; /* Tamanho grande do relógio */
+            color: #FF0000; /* Vermelho vibrante para o relógio */
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.9); /* Sombra para o efeito neon */
+            letter-spacing: 5px; /* Espaçamento entre os números */
+        }
+
+        /* --- NOVO: Estilos para o Coração Clicável --- */
+        .clickable-heart {
+            font-size: 8em; /* Tamanho do coração */
+            color: #FF0000; /* Cor vermelha do coração */
+            cursor: pointer; /* Indica que é clicável */
+            opacity: 0; /* Começa invisível */
+            transform: scale(0.5); /* Começa menor */
+            animation: fadeInScalePulse 1.5s ease-out forwards; /* Animação de entrada e pulso */
+            margin-top: 40px; /* Espaço acima do coração */
+            display: none; /* Escondido por padrão, JavaScript vai mostrar */
+        }
+
+        @keyframes fadeInScalePulse {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.1); } /* Cresce um pouco mais */
+            100% { opacity: 1; transform: scale(1); } /* Volta ao normal */
+        }
+        /* --- FIM: Estilos para o Coração Clicável --- */
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            #countdown-title {
+                font-size: 1.8em;
+            }
+            #timer {
+                font-size: 4em;
+            }
+            .top-image {
+                max-width: 90%;
+            }
+            .clickable-heart {
+                font-size: 6em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #countdown-title {
+                font-size: 1.5em;
+            }
+            #timer {
+                font-size: 3em;
+                letter-spacing: 2px;
+            }
+            .countdown-container {
+                padding: 15px 25px;
+            }
+            .clickable-heart {
+                font-size: 4em;
+            }
+        }
+
+        /* Importando fonte Digital-7 para estilo de relógio (opcional, requer internet) */
+        @font-face {
+            font-family: 'Digital-7';
+            src: url('digital-7.woff') format('woff'), 
+                 url('https://fonts.cdnfonts.com/s/32959/Digital-7.woff') format('woff'); 
+        }
+    </style>
+</head>
+<body>
+    <div class="top-image-container">
+        <img src="IM2.PNG" alt="Corações" class="top-image">
+    </div>
+
+    <div class="countdown-container">
+        <div id="countdown-title">Seu Dia dos Namorados está quase aqui!</div>
+        <div id="timer">00:00:00</div>
+    </div>
+
+    <div class="clickable-heart" id="clickableHeart">❤️</div>
+
+    <script>
+        function iniciarContagemRegressiva() {
+            // Define a data alvo para o Dia dos Namorados: 12 de Junho do ano atual, à meia-noite (-03:00)
+            const dataAlvo = new Date('2025-06-11T00:00:00-03:00'); 
+            const agora = new Date(); // Pega a data e hora atual
+
+            // Se o dia dos namorados já passou para este ano, ajuste para o próximo ano
+            // (Para o caso de você testar após o 12 de Junho de 2025)
+            if (agora.getTime() > dataAlvo.getTime() && agora.getMonth() >= 5 && agora.getDate() >= 12) {
+                dataAlvo.setFullYear(agora.getFullYear() + 1);
+            }
+            
+            const timerElement = document.getElementById('timer');
+            const countdownTitleElement = document.getElementById('countdown-title');
+            const clickableHeart = document.getElementById('clickableHeart');
+
+            function atualizarRelogio() {
+                const agora = new Date();
+                const diferenca = dataAlvo.getTime() - agora.getTime();
+
+                if (diferenca > 0) {
+                    // Calcula dias, horas, minutos e segundos restantes
+                    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+                    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+                    const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+                    // Formata para ter sempre dois dígitos (ex: 05, 12)
+                    const formatarTempo = (tempo) => String(tempo).padStart(2, '0');
+
+                    // Exibe a contagem regressiva
+                    if (dias > 0) {
+                        timerElement.innerText = `${dias}d ${formatarTempo(horas)}:${formatarTempo(minutos)}:${formatarTempo(segundos)}`;
+                    } else {
+                        timerElement.innerText = `${formatarTempo(horas)}:${formatarTempo(minutos)}:${formatarTempo(segundos)}`;
+                    }
+                } else {
+                    // Contagem regressiva terminou
+                    timerElement.innerText = '00:00:00'; // Garante que mostre zero
+                    countdownTitleElement.innerText = 'CLIQUE NO CORAÇÃO!'; // Muda o título
+                    
+                    // Mostra o coração clicável
+                    clickableHeart.style.display = 'block'; // Torna visível
+                    clickableHeart.style.opacity = 1; // Garante opacidade para a animação
+
+                    // Adiciona o evento de clique ao coração
+                    clickableHeart.onclick = function() {
+                        window.location.href = 'login.html'; // Redireciona para a tela de login
+                    };
+                    
+                    clearInterval(intervalo); // Para de atualizar a contagem
+                }
+            }
+
+            // Atualiza o relógio a cada segundo
+            const intervalo = setInterval(atualizarRelogio, 1000);
+            atualizarRelogio(); // Chama uma vez para exibir a contagem imediatamente
+        }
+
+        // Inicia a contagem regressiva quando a página é totalmente carregada
+        document.addEventListener('DOMContentLoaded', iniciarContagemRegressiva);
+    </script>
+</body>
+</html>
